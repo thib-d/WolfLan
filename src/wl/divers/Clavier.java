@@ -1,6 +1,11 @@
 package wl.divers;
 import java.util.Hashtable;
 import java.util.Scanner;
+
+/*/
+ * remplace le clavier et permet de repondre automatiquement si la reponse est dans la Hashtable
+ * 
+ */
 public class Clavier {
 	static Scanner sc = new Scanner(System.in);
 	static Hashtable<String, String> mapCode;
