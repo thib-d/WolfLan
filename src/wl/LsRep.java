@@ -23,6 +23,10 @@ import java.util.*;
 	retourne une array liste de File avec comme dernier element la longeur a enlevr pour avoir le chemin relatif 
  */
 
+/**
+ * @author 
+ *class a refaire car pas propre
+ */
 public class LsRep
  {
 	static ArrayList<File> liste = new ArrayList<File>();//liste de dossier
