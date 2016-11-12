@@ -32,6 +32,11 @@ public class Reception {
 		sc2 = psc2;
 	}
 	
+	/**
+	 * @param chaine
+	 * @return
+	 * changer le / en \ si windows
+	 */
 	public static String changerseparator(String chaine){		
 		if (OSClient==wl.divers.OSValidator.recupNumOs()){return chaine;}
 		if (OSClient==0 && wl.divers.OSValidator.recupNumOs()==1){
@@ -43,6 +48,11 @@ public class Reception {
 		
 	return chaine;
 	}
+	/**
+	 * @param chaine
+	 * @return
+	 * changer le / en \ si windows
+	 */
 	public static String remplacerLeMal(String chaine){
 	String[] tab;
 	tab=chaine.split("");
@@ -60,6 +70,10 @@ public class Reception {
 
 
 
+	/**
+	 * @throws Exception
+	 * demande le type de reception
+	 */
 	public static void recevoir() throws Exception{
 		System.out.println(connexion.readUTF()); 
 		connexion.writeUTF("pret ! ");
@@ -89,6 +103,11 @@ public class Reception {
 
 	
 	
+	/**
+	 * @param fichier
+	 * @throws Exception
+	 * repete la reception
+	 */
 	private static void synchronisation(String fichier) throws Exception{//qui peut aussi etre un dossier
 		boolean fin=false;
 		while(!fin){
@@ -100,6 +119,12 @@ public class Reception {
 	
 	
 	
+	/**
+	 * @param emplacementChoisi
+	 * @param mode
+	 * @throws Exception
+	 * receptionner un fichier
+	 */
 	private static void receptionSimple(String emplacementChoisi,int mode) throws Exception{
 	int nbDossiers;
 	int nbFichiers;
@@ -117,7 +142,7 @@ public class Reception {
 
 	buffer=connexion.readInt();		
 	File fTmp;
-	for(int i=0;i<nbDossiers;i++)
+	for(int i=0;i<nbDossiers;i++)// cree tout les dossier
 	{
 		fileName=connexion.readUTF();
 		fileName=changerseparator(fileName);
@@ -138,22 +163,19 @@ public class Reception {
 		tailleFichier=connexion.readInt();
 		
 		if(mode==1){
-			System.out.println(" tu me propose "+fileName2);
 			fTmp=new File(fileName2);
-			System.out.println("exsist?"+fTmp.exists());
 			if(!fTmp.exists() ){
 				
 				System.out.println("je n ai pas"+fTmp.getPath());
 				connexion.writeUTF("yes ok send");
 			}
 			else{
-				System.out.println("j ai deja"+fTmp.getPath());
 				connexion.writeUTF("j ai deja");
 				sortir=true;
 
 			}
 		}
-		if(!sortir){
+		if(!sortir){// si il n y a pas deja le fichier
 		System.out.println("ecriture du fichier");
 		file = new File(emplacementChoisi+separator+fileName2);
 		System.out.println("creation du fichier "+file.getAbsolutePath());
@@ -164,6 +186,10 @@ public class Reception {
 	}
 		
 		
+	/**
+	 * @throws Exception
+	 * reception des données du fichier
+	 */
 	@SuppressWarnings("static-access")
 	private static void receptionContenu() throws Exception{
 		byte[] data;
