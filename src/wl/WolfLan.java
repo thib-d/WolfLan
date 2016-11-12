@@ -24,7 +24,7 @@ public class WolfLan /*implements Runnable*/{
 	String id,dossier;
 	protected static CryptSocket connexion;
 
-
+/*/
 	public WolfLan(String nom,String rep,int interfaceReseau,int port,String id,String dossier)
 	{
 
@@ -39,11 +39,12 @@ public class WolfLan /*implements Runnable*/{
 
 	}
 	
-
+/*/
 
 public static void main(String[] args) throws Exception
 	{
 	
+		/*///permet de mettre les argument dans Clavier
 		try{
 		String value,key;
 		for (String s: args){
@@ -52,10 +53,15 @@ public static void main(String[] args) throws Exception
 			value=s.split(":")[1];
 			System.out.println(",value:"+value);
 			mapCode.put(key,value);
+			
 		}
 		}catch(Exception E){System.out.println("erreur dans les arguments, les arguments doivent etre de la forme code:reponse,pour voir les codes voir wolflan.fr.nf ");
-		}try{
+		}
+		
+		/*/
+		try{
 		wl.divers.Clavier sc2 = new wl.divers.Clavier(mapCode);
+		/*///recherche des mise a jour
 		String Version = "V5.0.4" ;
 		 System.out.println("recherche de mise a jour ...");
 		 URL oracle = new URL("wolflan.fr.nf/vscript.txt");
@@ -71,16 +77,17 @@ public static void main(String[] args) throws Exception
 				
 			        in.close();
 		}
+		/*/
 		 }catch(Exception e){}
 		System.out.println("@author: Charles THIEBAUD & Thibault DACCORD");
 		
 		
 		
-		String fin="n";
+		//String fin="n";
 		//int reponseclient=0;
 		System.out.println("bienvenue dans wolflan");
-		System.out.println("E=enable lan,J=jumelage");
-		if (Clavier.nextLine(44).equals("J")){
+		System.out.println("E=enable ( accepter connexion) lan,J=jumelage (creer connexion)");
+		if (Clavier.nextLine(44).equals("J")){//partie client
 					boolean ipOk=false;
 					Detecteur detection = new Detecteur();
 					int repUser;
@@ -111,7 +118,7 @@ public static void main(String[] args) throws Exception
 							}
 						}catch(Exception e){System.out.println("erreur de connection"+e);}
 					}
-		}else{
+		}else{//partie serveur
 			System.out.println("lancement du serveur");
 			Detecteur detecteur= new Detecteur();
 			detecteur.lancerRepondeur();// cree un nouveau socket 
@@ -123,16 +130,7 @@ public static void main(String[] args) throws Exception
 			Reception reception = new Reception(cryptSocket,sc2);
 			reception.recevoir();
 		}
-	
-		
 		//connexion.fermer();
-		
-		
-		
-		
-		
-		
-		
 		System.out.println("bye");
 	}
 
@@ -141,13 +139,10 @@ public static void main(String[] args) throws Exception
 
 
 
-
-
-
+/*/
 
 public static ArrayList<String[]> getId() throws Exception
 	{
-
                 Enumeration<NetworkInterface> m = NetworkInterface.getNetworkInterfaces();
                 ArrayList<String[]> liste = new ArrayList<String[]>();
 
@@ -168,7 +163,8 @@ public static ArrayList<String[]> getId() throws Exception
 
           return liste;
 
-	}
+	}/*/
+	
 }
 
 //idee utiliser zlib
