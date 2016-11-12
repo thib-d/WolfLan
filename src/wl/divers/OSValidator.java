@@ -1,5 +1,9 @@
 package wl.divers;
-
+/*/
+ * permet de trouver quel os est utiliser
+ * 
+ * 
+ */
 public class OSValidator {
 	//retourne 1 si windows 
 	//retourne 0 si linux
