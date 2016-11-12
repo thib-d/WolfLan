@@ -19,7 +19,9 @@ public class Envoi{
 	private String rep;//reponse du user
 	int buffer;
 	static int tailleBuffer= 9999;
-
+	/*/ partie d envoi de fichier
+	 * 
+	 */
 	public Envoi(CryptSocket pconnextion,Clavier pclavier){
 		connexion=pconnextion;
 		clavier=pclavier;
@@ -81,6 +83,12 @@ public class Envoi{
 			
 	}
 			
+	
+	/**
+	 * @param fichier
+	 * @throws Exception
+	 * permet de synchoniser un fichier ou dossier, (propose d envoyer en permanence)
+	 */
 	private static void synchronisation(String fichier) throws Exception{//qui peut aussi etre un dossier
 		boolean fin=false;
 		while(!fin){
@@ -96,6 +104,12 @@ public class Envoi{
 	
 			
 			
+	/**
+	 * @param fichier
+	 * @param mode
+	 * @throws Exception
+	 * envoi un fichier
+	 */
 	private static void envoiSimple(String fichier,int mode) throws Exception{
 	 ArrayList<File> listeFichiers;
 	 ArrayList<File> listeDossiers;
@@ -105,9 +119,9 @@ public class Envoi{
 	 LsRep lsRep;
 	 int receptionOk =0;
 	 lsRep = new  LsRep();
-	 listeDossiers = LsRep.obtenirdossier(fichier);
-	 listeFichiers = LsRep.obtenirfichier(fichier);
-	lgrelatif=Integer.parseInt(listeFichiers.get(listeFichiers.size()-1).getPath());
+	 listeDossiers = LsRep.obtenirdossier(fichier);//liste tout les dossiers du dossier "fichier" (qui peut etre un dossier)
+	 listeFichiers = LsRep.obtenirfichier(fichier);//liste tout les fichiers du dossier "fichier" (qui peut etre un dossier)
+	lgrelatif=Integer.parseInt(listeFichiers.get(listeFichiers.size()-1).getPath());//-1 car le dernier element est le chemin relatif
 	listeDossiers.remove(listeDossiers.size()-1);
 	listeFichiers.remove(listeFichiers.size()-1);		
 	//envoi du nombre de dossier
@@ -124,7 +138,7 @@ public class Envoi{
 		{
 			cheminRelatif=listeDossiers.get(i).getCanonicalPath().substring(lgrelatif+1);
 
-			connexion.writeUTF(cheminRelatif);
+			connexion.writeUTF(cheminRelatif);//envoi tout les dossier
 		}	
 
 
@@ -133,8 +147,8 @@ public class Envoi{
 		System.out.println("envoi du nom "+listeFichiers.get(i).getCanonicalPath().substring(lgrelatif+1));
 		connexion.writeUTF(listeFichiers.get(i).getCanonicalPath().substring(lgrelatif+1));
 		connexion.writeInt((int)listeFichiers.get(i).length());
-		if(mode==1 ){
-			if(connexion.readUTF().equals("yes ok send")){
+		if(mode==1 ){// si syncronisation
+			if(connexion.readUTF().equals("yes ok send")){//si il ne l a pas
 				sendContenu(listeFichiers.get(i));
 			}
 		}
@@ -147,7 +161,9 @@ public class Envoi{
 		
 		
 	}
-	
+	/*/
+	 * envoi le contenu d un fichier
+	 */
 	private static void sendContenu(File file) throws IOException{
 		 RandomAccessFile inFile;	
 		 inFile = new RandomAccessFile(file,"r");
@@ -197,18 +213,4 @@ public class Envoi{
 		
 	}		
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+	
