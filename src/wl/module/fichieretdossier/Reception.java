@@ -40,7 +40,7 @@ public class Reception {
 	public static String changerseparator(String chaine){		
 		if (OSClient==wl.divers.OSValidator.recupNumOs()){return chaine;}
 		if (OSClient==0 && wl.divers.OSValidator.recupNumOs()==1){
-			chaine.replaceAll("/",separator);
+			chaine.replaceAll("/","\\\\");//chaine.replaceAll("/",separator);
 		}
 		if (OSClient==1 && wl.divers.OSValidator.recupNumOs()==0){
 			chaine=remplacerLeMal(chaine);
