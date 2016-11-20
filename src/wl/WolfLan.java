@@ -125,7 +125,7 @@ public static void main(String[] args) throws Exception
 			detecteur.actualiserScan();
 			ArrayList<Socket> coPossible = detecteur.getConnexionsPossibles();
 			System.out.println("le serveur a trouver "+coPossible.size()+ " serveur");
-			CryptSocket cryptSocket = new CryptSocket(coPossible);
+			CryptSocket cryptSocket = new CryptSocket(coPossible);// TODO, a changer (avec new CryptSocket(coPossible,ip);
 			cryptSocket.acceptLink();
 			Reception reception = new Reception(cryptSocket,sc2);
 			reception.recevoir();
